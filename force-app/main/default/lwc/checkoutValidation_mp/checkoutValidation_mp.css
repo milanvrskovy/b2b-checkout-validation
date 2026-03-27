@@ -1,0 +1,9 @@
+.validation {
+    background-color: var(--slds-g-color-error-base-80);
+    border-left-color: var(--slds-g-color-error-base-50);
+    color: var(--slds-g-color-error-base-10);
+    border-left-width: 4px;
+    border-left-style: solid;
+    border-radius: 4px;
+    list-style: none;
+}

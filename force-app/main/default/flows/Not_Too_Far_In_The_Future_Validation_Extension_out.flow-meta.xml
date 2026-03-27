@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <description>Validates that the Order EffectiveDate is not more than one year in the future. External extension for CheckoutValidationService_mp.</description>
+    <label>Not Too Far In The Future Validation Extension</label>
+    <processType>AutoLaunchedFlow</processType>
+    <status>Active</status>
+
+    <!-- INPUT: Order record passed by CheckoutValidationService_mp -->
+    <variables>
+        <name>order</name>
+        <dataType>SObject</dataType>
+        <objectType>Order</objectType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+
+    <!-- OUTPUT: Text collection read by CheckoutValidationService_mp as 'validationMessages' -->
+    <variables>
+        <name>validationMessages</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+
+    <!-- Compute the date one year from today -->
+    <formulas>
+        <name>OneYearFromToday</name>
+        <dataType>Date</dataType>
+        <expression>TODAY() + 365</expression>
+    </formulas>
+
+    <!-- Check if EffectiveDate exceeds one year from today -->
+    <decisions>
+        <name>IsEffectiveDateTooFar</name>
+        <label>Is Effective Date Too Far</label>
+        <locationX>200</locationX>
+        <locationY>200</locationY>
+        <defaultConnectorLabel>Within Range</defaultConnectorLabel>
+        <rules>
+            <name>EffectiveDateExceedsOneYear</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>order.EffectiveDate</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <elementReference>OneYearFromToday</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>AddValidationMessage</targetReference>
+            </connector>
+            <label>Effective Date Exceeds One Year</label>
+        </rules>
+    </decisions>
+
+    <!-- Add the validation message to the output collection -->
+    <assignments>
+        <name>AddValidationMessage</name>
+        <label>Add Validation Message</label>
+        <locationX>400</locationX>
+        <locationY>200</locationY>
+        <assignmentItems>
+            <assignToReference>validationMessages</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <stringValue>The order start date is too far from now</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+
+    <!-- Flow start -->
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>IsEffectiveDateTooFar</targetReference>
+        </connector>
+    </start>
+
+</Flow>

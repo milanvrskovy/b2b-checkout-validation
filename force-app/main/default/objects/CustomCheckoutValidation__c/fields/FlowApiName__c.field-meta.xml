@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FlowApiName__c</fullName>
+    <description>Programmatic validation - reference a flow validation extension.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Reference a flow validation extension.</inlineHelpText>
+    <label>Flow API Name</label>
+    <length>255</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

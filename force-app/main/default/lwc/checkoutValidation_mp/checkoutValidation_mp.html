@@ -1,0 +1,35 @@
+<template>
+    <lightning-card title="Order Validation">
+        <div class="slds-p-around_medium">
+
+            <div class="slds-m-bottom_medium">
+                <lightning-button
+                    label="Validate Order"
+                    onclick={handleValidate}
+                    disabled={isLoading}>
+                </lightning-button>
+            </div>
+
+            <template lwc:if={isLoading}>
+                <lightning-spinner alternative-text="Validating..." size="small"></lightning-spinner>
+            </template>
+
+            <template lwc:if={hasMessages}>
+                <ul class="slds-m-top_small">
+                    <template for:each={response.messages} for:item="message">
+                        <li key={message} class="validation slds-p-around_small slds-m-bottom_x-small">
+                            {message}
+                        </li>
+                    </template>
+                </ul>
+            </template>
+
+            <template lwc:if={isSuccess}>
+                <div class="slds-notify slds-notify_toast slds-theme_success slds-m-top_small">
+                    <p>Order is valid and ready to be placed.</p>
+                </div>
+            </template>
+
+        </div>
+    </lightning-card>
+</template>

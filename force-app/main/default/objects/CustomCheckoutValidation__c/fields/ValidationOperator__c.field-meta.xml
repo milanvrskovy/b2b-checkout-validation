@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidationOperator__c</fullName>
+    <description>Operator to compare the Validated Field against the Validation Value.</description>
+    <inlineHelpText>Select the Operator to compare the Validated Field against the Validation Value.</inlineHelpText>
+    <label>Validation Operator</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>ValidationOperator</valueSetName>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ValidatedField__c</fullName>
+    <description>API Name of Order field to validate.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Specify the Order field (API Name) to validate.</inlineHelpText>
+    <label>Validated Field</label>
+    <length>255</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>
